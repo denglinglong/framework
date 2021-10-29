@@ -1,0 +1,53 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/qmake.mk
+
+# Skip tests on the archs they are known to be flaky with current configuration
+testskip_architectures := powerpc s390x
+
+# Package names
+PKG_version     := $(shell dpkg-parsechangelog | sed -n 's/^Version: //p')
+PKG_source      := $(shell dpkg-parsechangelog | sed -n 's/^Source: //p')
+UPS_version     := $(shell echo '$(PKG_version)' | sed 's/.*://; s/-[^-]*$$//')
+GIT_rev         := $(shell echo '$(UPS_version)' | sed 's/.*+//')
+GIT_repo        := https://github.com/maliit/framework.git
+
+comma :=,
+empty :=
+space := $(empty) $(empty)
+
+# Build options
+ENABLE_MULTITOUCH = false
+DEB_QMAKE_CONFIG_VAL = qt5-inputcontext glib debug nodoc warn_off
+DEB_QMAKE_ARGS = \
+	M_IM_PREFIX=/usr \
+	MALIIT_SERVER_ARGUMENTS="-software -bypass-wm-hint" \
+	MALIIT_DEFAULT_PLUGIN=libmaliit-keyboard-plugin.so
+
+get-packaged-orig-source:
+	rm -rf $(PKG_source)-$(UPS_version)
+	rm -f $(PKG_source)-$(UPS_version).orig.tar.gz
+	git clone $(GIT_repo) $(PKG_source)-$(UPS_version)
+	cd $(PKG_source)-$(UPS_version) && git archive \
+		--format tar \
+		--prefix $(PKG_source)-$(UPS_version)/ \
+		$(GIT_rev) \
+		| gzip >../$(PKG_source)_$(UPS_version).orig.tar.gz
+	rm -rf $(PKG_source)-$(UPS_version)
+
+run-tests:
+ifneq ($(DEB_HOST_ARCH),$(findstring $(DEB_HOST_ARCH), $(testskip_architectures)))
+	xvfb-run -s '-screen 0 640x480x24' -a $(MAKE) check
+endif
+
+DEB_MAKE_CHECK_TARGET := -f debian/rules run-tests
+
+DEB_DH_INSTALL_ARGS := --fail-missing -Xexample -Xtests
+
+DEB_DH_STRIP_ARGS := --dbg-package=maliit-framework-dbg
+
+.PHONY: run-tests

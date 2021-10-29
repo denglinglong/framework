@@ -1,0 +1,41 @@
+From: Thomas Moenicke <thomas.moenicke@canonical.com>
+Subject: Adding Ubuntu hints to the QPA platform interface.
+Forwarded: no
+
+Index: maliit-framework-0.99+git20130702+97e8335/passthroughserver/main.cpp
+===================================================================
+--- maliit-framework-0.99+git20130702+97e8335.orig/passthroughserver/main.cpp	2013-06-14 23:04:41.000000000 -0300
++++ maliit-framework-0.99+git20130702+97e8335/passthroughserver/main.cpp	2013-07-04 15:37:56.440347671 -0300
+@@ -28,6 +28,8 @@
+ #include <QGuiApplication>
+ #include <QtDebug>
+ 
++#include <qpa/qplatformnativeinterface.h>
++
+ namespace {
+ 
+ void disableMInputContextPlugin()
+@@ -146,5 +148,10 @@
+     MImServer imServer(icConnection, platform);
+     Q_UNUSED(imServer);
+ 
++    QPlatformNativeInterface* nativeInterface = QGuiApplication::platformNativeInterface();
++    nativeInterface->setProperty("UbuntuSessionType", 1);   // SYSTEM_SESSION_TYPE
++    nativeInterface->setProperty("ubuntuSessionType", 1);   // SYSTEM_SESSION_TYPE
++    nativeInterface->setProperty("session", 1);   // SYSTEM_SESSION_TYPE
++
+     return app.exec();
+ }
+Index: maliit-framework-0.99+git20130702+97e8335/passthroughserver/passthroughserver.pro
+===================================================================
+--- maliit-framework-0.99+git20130702+97e8335.orig/passthroughserver/passthroughserver.pro	2013-06-14 23:04:41.000000000 -0300
++++ maliit-framework-0.99+git20130702+97e8335/passthroughserver/passthroughserver.pro	2013-07-04 15:39:19.488344178 -0300
+@@ -13,7 +13,7 @@
+ 
+ SOURCES += main.cpp
+ 
+-QT += core gui
++QT += core gui gui-private
+ 
+ # coverage flags are off per default, but can be turned on via qmake COV_OPTION=on
+ for(OPTION,$$list($$lower($$COV_OPTION))){

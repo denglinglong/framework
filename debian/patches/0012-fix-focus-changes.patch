@@ -1,0 +1,22 @@
+Author: Michael Sheldon <michael.sheldon@canonical.com>
+Forwarded: no
+Description: Only allow focus removal from input items.
+ Maliit can remove focus from inappropriate items (like the Mir surface
+ of an application) if the focus is changed or the application switched
+ whilst the keyboard is hiding. This patch ensures that focus is only
+ ever removed from items that wish to receive input from the OSK.
+Bug-Ubuntu: https://bugs.launchpad.net/bugs/1373985
+
+Index: maliit-framework-0.99.0+git20130923+17fdf86/input-context/minputcontext.cpp
+===================================================================
+--- maliit-framework-0.99.0+git20130923+17fdf86.orig/input-context/minputcontext.cpp
++++ maliit-framework-0.99.0+git20130923+17fdf86/input-context/minputcontext.cpp
+@@ -410,7 +410,7 @@ void MInputContext::imInitiatedHide()
+ 
+     // remove focus on QtQuick2
+     QQuickItem *inputItem = qobject_cast<QQuickItem*>(QGuiApplication::focusObject());
+-    if (inputItem) {
++    if (inputItem && inputItem->flags().testFlag(QQuickItem::ItemAcceptsInputMethod)) {
+         inputItem->setFocus(false);
+     }
+ 

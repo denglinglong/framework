@@ -1,0 +1,32 @@
+From: Thomas Moenicke <thomas.moenicke@canonical.com>
+Subject: loading testability driver. code copied from CameraApp
+
+Forwarded: no 
+Index: maliit-framework-0.99+git20130702+97e8335/passthroughserver/main.cpp
+===================================================================
+--- maliit-framework-0.99+git20130702+97e8335.orig/passthroughserver/main.cpp	2013-07-17 14:16:06.235252966 +0200
++++ maliit-framework-0.99+git20130702+97e8335/passthroughserver/main.cpp	2013-07-17 12:02:29.000000000 +0200
+@@ -138,6 +138,23 @@
+ 
+     QGuiApplication app(argc, argv);
+ 
++    // The testability driver is only loaded by QApplication but not by QGuiApplication.
++    // However, QApplication depends on QWidget which would add some unneeded overhead => Let's load the testability driver on our own.
++    if (app.arguments().contains(QLatin1String("-testability"))) {
++      QLibrary testLib(QLatin1String("qttestability"));
++      if (testLib.load()) {
++	typedef void (*TasInitialize)(void);
++	TasInitialize initFunction = (TasInitialize)testLib.resolve("qt_testability_init");
++	if (initFunction) {
++	  initFunction();
++	} else {
++	  qCritical("Library qttestability resolve failed!");
++	}
++      } else {
++	qCritical("Library qttestability load failed!");
++      }
++    }
++
+     // Input Context Connection
+     QSharedPointer<MInputContextConnection> icConnection(createConnection(connectionOptions));
+ 

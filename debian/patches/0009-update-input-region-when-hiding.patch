@@ -1,0 +1,25 @@
+Author: Michael Sheldon <michael.sheldon@canonical.com>
+Forwarded: no
+Description: Update input method area when hiding the keyboard
+ This patch ensures that maliit continues to update the input method area after the
+ keyboard has been dismissed. This allows keyboard hiding animations to provide a
+ smooth transition between the showing and hiding states.
+
+Index: maliit-framework-0.99+git20130702+97e8335/src/windowgroup.cpp
+===================================================================
+--- maliit-framework-0.99.0+git20130615+97e8335.orig/src/windowgroup.cpp
++++ maliit-framework-0.99.0+git20130615+97e8335/src/windowgroup.cpp
+@@ -104,9 +104,10 @@ void WindowGroup::setInputMethodArea(con
+         }
+     }
+ 
+-    if (m_active) {
+-        updateInputMethodArea();
+-    }
++    // We should update the input method area regardless of whether we're still
++    // active or not, as keyboard hiding animations could be changing this 
++    // region after we've deactivated
++    updateInputMethodArea();
+ }
+ 
+ void WindowGroup::setApplicationWindow(WId id)

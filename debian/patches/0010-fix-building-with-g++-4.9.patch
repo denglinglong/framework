@@ -1,0 +1,15 @@
+Index: maliit-framework-0.99.0+git20130615+97e8335/src/src.pro
+===================================================================
+--- maliit-framework-0.99.0+git20130615+97e8335.orig/src/src.pro
++++ maliit-framework-0.99.0+git20130615+97e8335/src/src.pro
+@@ -147,6 +147,10 @@ for(OPTION,$$list($$lower($$COV_OPTION))
+     }
+ }
+ 
++# g++ 4.9 introduces a new check for unused functions that we wish to ignore
++# to avoid removing upstream code
++QMAKE_CXXFLAGS += -Wno-unused-function
++
+ OBJECTS_DIR = .obj
+ MOC_DIR = .moc
+ 

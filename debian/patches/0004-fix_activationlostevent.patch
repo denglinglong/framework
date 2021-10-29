@@ -1,0 +1,23 @@
+From: Thomas Moenicke <thomas.moenicke@canonical.com>
+Subject: fix activationlostevent
+
+Forwarded: no 
+Index: maliit-framework/input-context/minputcontext.cpp
+===================================================================
+--- maliit-framework.orig/input-context/minputcontext.cpp	2013-07-05 14:03:09.713553608 +0200
++++ maliit-framework/input-context/minputcontext.cpp	2013-07-12 17:16:31.708912452 +0200
+@@ -369,10 +369,14 @@
+ 
+ void MInputContext::activationLostEvent()
+ {
++    if (debug) qDebug() << InputContextName << "in" << __PRETTY_FUNCTION__;
++
+     // This method is called when activation was gracefully lost.
+     // There is similar cleaning up done in onDBusDisconnection.
+     active = false;
+     inputPanelState = InputPanelHidden;
++
++    updateInputMethodArea(QRect());
+ }
+ 
+ 

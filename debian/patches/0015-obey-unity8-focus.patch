@@ -1,0 +1,145 @@
+Description: Verify an application has focus before granting it input
+ To avoid the possibility of applications claiming input when they're
+ not in the foreground we now confirm with unity8 that they really are
+ the currently focused application.
+ .
+Author: Michael Sheldon <michael.sheldon@canonical.com>
+Bug-Ubuntu: https://launchpad.net/bugs/1594863
+Forwarded: no
+Last-Update: 2016-07-05
+
+Index: maliit-framework-0.99.1+git20151118+62bd54b/connection/connection.pro
+===================================================================
+--- maliit-framework-0.99.1+git20151118+62bd54b.orig/connection/connection.pro
++++ maliit-framework-0.99.1+git20151118+62bd54b/connection/connection.pro
+@@ -24,6 +24,9 @@ PUBLIC_SOURCES += \
+ # Default to building qdbus based connection
+ CONFIG += qdbus-dbus-connection
+ 
++CONFIG += link_pkgconfig
++PKGCONFIG += dbus-1
++
+ wayland {
+     QT += gui-private
+     PUBLIC_SOURCES += \
+Index: maliit-framework-0.99.1+git20151118+62bd54b/connection/dbusinputcontextconnection.cpp
+===================================================================
+--- maliit-framework-0.99.1+git20151118+62bd54b.orig/connection/dbusinputcontextconnection.cpp
++++ maliit-framework-0.99.1+git20151118+62bd54b/connection/dbusinputcontextconnection.cpp
+@@ -18,7 +18,12 @@
+ #include "minputmethodcontext1interface_interface.h"
+ #include "dbuscustomarguments.h"
+ 
++#include <dbus/dbus.h>
++
++#include <QGuiApplication>
++#include <QDBusArgument>
+ #include <QDBusConnection>
++#include <QDBusInterface>
+ #include <QDBusMessage>
+ #include <QDBusServer>
+ 
+@@ -37,6 +42,8 @@ const char * const DBusLocalPath("/org/f
+ const char * const DBusLocalInterface("org.freedesktop.DBus.Local");
+ const char * const DisconnectedSignal("Disconnected");
+ 
++const char * const DBusUnityFocusPath("/com/canonical/Unity/FocusInfo");
++const char * const DBusUnityFocusInterface("com.canonical.Unity.FocusInfo");
+ }
+ 
+ DBusInputContextConnection::DBusInputContextConnection(const QSharedPointer<Maliit::Server::DBus::Address> &address)
+@@ -45,6 +52,7 @@ DBusInputContextConnection::DBusInputCon
+     , mServer(mAddress->connect())
+     , mConnectionNumbers()
+     , mProxys()
++    , mUnityFocus(0)
+     , lastLanguage()
+ {
+     connect(mServer.data(), SIGNAL(newConnection(QDBusConnection)), this, SLOT(newConnection(QDBusConnection)));
+@@ -55,11 +63,19 @@ DBusInputContextConnection::DBusInputCon
+     qDBusRegisterMetaType<Maliit::PreeditTextFormat>();
+     qDBusRegisterMetaType<QList<Maliit::PreeditTextFormat> >();
+ 
++    if (QGuiApplication::platformName() == "ubuntumirclient") {
++        QDBusConnection bus = QDBusConnection::sessionBus();
++        mUnityFocus = new QDBusInterface(DBusUnityFocusInterface,
++                                         DBusUnityFocusPath,
++                                         DBusUnityFocusInterface, bus);
++    }
++
+     new Uiserver1Adaptor(this);
+ }
+ 
+ DBusInputContextConnection::~DBusInputContextConnection()
+ {
++    delete mUnityFocus;
+ }
+ 
+ void
+@@ -310,7 +326,29 @@ DBusInputContextConnection::connectionNu
+ 
+ void DBusInputContextConnection::activateContext()
+ {
+-    MInputContextConnection::activateContext(connectionNumber());
++    if (QGuiApplication::platformName() == "ubuntumirclient") {
++        // If we're running under Mir verify that the application really
++        // has focus.
++        unsigned long pid = 0;
++
++        // HACK: Because we're using a peer-to-peer connection the only way to
++        // get the PID of client is via libdbus and QtDbus doesn't wrap this
++        // functionality (QTBUG-22799), so we have to access the internal
++        // DBusConnection pointer and use libdbus directly.
++        if(!dbus_connection_get_unix_process_id((DBusConnection* )connection().internalPointer(), &pid)) {
++            qWarning() << "Failed to get PID";
++            return;
++        }
++
++        bool focused = mUnityFocus->call("isPidFocused", (unsigned int) pid).arguments().at(0).toBool();
++        if (focused) {
++            MInputContextConnection::activateContext(connectionNumber());
++        } else {
++            qWarning() << "Application attempted to activate itself without focus, PID: " << pid;
++        }
++    } else {
++        MInputContextConnection::activateContext(connectionNumber());
++    }
+ }
+ 
+ void DBusInputContextConnection::showInputMethod()
+Index: maliit-framework-0.99.1+git20151118+62bd54b/connection/dbusinputcontextconnection.h
+===================================================================
+--- maliit-framework-0.99.1+git20151118+62bd54b.orig/connection/dbusinputcontextconnection.h
++++ maliit-framework-0.99.1+git20151118+62bd54b/connection/dbusinputcontextconnection.h
+@@ -23,6 +23,8 @@
+ #include <QDBusVariant>
+ #include <QHash>
+ 
++class QDBusInterface;
++
+ class ComMeegoInputmethodInputcontext1Interface;
+ 
+ class DBusInputContextConnection : public MInputContextConnection,
+@@ -97,6 +99,7 @@ private:
+     QHash<QString, unsigned int> mConnectionNumbers;
+     QHash<unsigned int, ComMeegoInputmethodInputcontext1Interface *> mProxys;
+     QHash<unsigned int, QString> mConnections;
++    QDBusInterface *mUnityFocus;
+ 
+     QString lastLanguage;
+ };
+Index: maliit-framework-0.99.1+git20151118+62bd54b/connection/libmaliit-connection.pri
+===================================================================
+--- maliit-framework-0.99.1+git20151118+62bd54b.orig/connection/libmaliit-connection.pri
++++ maliit-framework-0.99.1+git20151118+62bd54b/connection/libmaliit-connection.pri
+@@ -11,7 +11,9 @@ INCLUDEPATH += $$TOP_DIR/connection $$OU
+ 
+ QT += dbus
+ 
++CONFIG += link_pkgconfig
++PKGCONFIG += dbus-1
++
+ wayland {
+-    CONFIG += link_pkgconfig
+     PKGCONFIG += wayland-client
+ }

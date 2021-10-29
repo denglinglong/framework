@@ -1,0 +1,8 @@
+XIM=none
+XIM_PROGRAM=/usr/bin/maliit-server
+XIM_ARGS=
+
+GTK_IM_MODULE=Maliit
+QT_IM_MODULE=MaliitPhablet
+
+DEPENDS="maliit-framework"

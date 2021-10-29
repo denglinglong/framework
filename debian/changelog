@@ -1,0 +1,516 @@
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu30) hirsute; urgency=medium
+
+  * No-change rebuild against qtbase-abi-5-15-2.
+
+ -- Dmitry Shachnev <mitya57@ubuntu.com>  Fri, 27 Nov 2020 18:56:46 +0300
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu29) hirsute; urgency=medium
+
+  * Remove Build-Depends on qt5-default, which was removed.
+
+ -- Dmitry Shachnev <mitya57@ubuntu.com>  Fri, 30 Oct 2020 15:01:11 +0300
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu28) hirsute; urgency=medium
+
+  * No-change rebuild against qtbase-abi-5-15-1.
+
+ -- Dmitry Shachnev <mitya57@ubuntu.com>  Fri, 30 Oct 2020 14:03:20 +0300
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu27) groovy; urgency=medium
+
+  * No-change rebuild against qtbase-abi-5-14-2.
+
+ -- Rik Mills <rikmills@kde.org>  Sat, 16 May 2020 08:51:45 +0000
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu26) focal; urgency=medium
+
+  * No-change rebuild against qtbase-abi-5-12-8.
+
+ -- Rik Mills <rikmills@kde.org>  Fri, 10 Apr 2020 20:03:38 +0100
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu25) focal; urgency=medium
+
+  * No-change rebuild for libgcc-s1 package name change.
+
+ -- Matthias Klose <doko@ubuntu.com>  Sun, 22 Mar 2020 16:49:05 +0100
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu24) focal; urgency=medium
+
+  * No-change rebuild against qtbase-abi-5-12-5.
+
+ -- Rik Mills <rikmills@kde.org>  Sun, 27 Oct 2019 06:30:24 +0000
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu23) eoan; urgency=medium
+
+  * No-change rebuild against qtbase-abi-5-12-4.
+
+ -- Dmitry Shachnev <mitya57@ubuntu.com>  Mon, 08 Jul 2019 11:44:04 +0300
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu22) disco; urgency=medium
+
+  * Rebuild against qtbase-abi-5-12-2.
+  * debian/rules: Add s390x to list of architectures to skip tests on.
+
+ -- Rik Mills <rikmills@kubuntu.org>  Wed, 27 Mar 2019 14:18:47 +0000
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu21) disco; urgency=medium
+
+  * No-change rebuild against qtbase-abi-5-11-3.
+
+ -- Rik Mills <rikmills@kubuntu.org>  Thu, 03 Jan 2019 03:55:25 +0000
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu20) disco; urgency=medium
+
+  * No-change rebuild against qtbase-abi-5-11-2.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Tue, 13 Nov 2018 17:30:00 -0600
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu19) cosmic; urgency=medium
+
+  * No-change rebuild against qtbase-abi-5-11-0.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Sat, 30 Jun 2018 23:56:19 -0500
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu18) bionic; urgency=medium
+
+  * No-change rebuild against qtbase-abi-5-9-5.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Sat, 14 Apr 2018 22:00:20 -0500
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu17) bionic; urgency=medium
+
+  * No-change rebuild against qtbase-abi-5-9-4.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Tue, 27 Feb 2018 09:49:35 -0600
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu16) bionic; urgency=medium
+
+  * No-change rebuild against qtbase5-private-dev.
+
+ -- Simon Quigley <tsimonq2@ubuntu.com>  Fri, 03 Nov 2017 17:19:13 -0500
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu15) artful; urgency=medium
+
+  * Build-depend on qml-module-qtquick2 instead of transitional package
+    qtdeclarative5-qtquick2-plugin.
+
+ -- Dmitry Shachnev <mitya57@ubuntu.com>  Mon, 26 Jun 2017 15:03:09 +0300
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu14) zesty; urgency=medium
+
+  [ Michael Sheldon ]
+  * debian/patches/0017-maliit-config-path-environment-variable.patch:
+    - Allow the maliit config to be set via an environment variable
+
+ -- Łukasz 'sil2100' Zemczak <lukasz.zemczak@ubuntu.com>  Mon, 06 Feb 2017 09:46:21 +0100
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu13~2) zesty; urgency=medium
+
+  * No change rebuild
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Wed, 04 Jan 2017 08:56:43 +0200
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu12) zesty; urgency=medium
+
+  [ Michael Sheldon ]
+  * debian/patches/0016-set-plugin-path-from-environment.patch:
+    - Allow the plugin path to be set from an environment variable
+
+ -- Łukasz 'sil2100' Zemczak <lukasz.zemczak@ubuntu.com>  Fri, 04 Nov 2016 18:00:08 +0100
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu11) yakkety; urgency=medium
+
+  [ Andreas Pokorny ]
+  * Add compose-input-platform-in-maliit.patch to load qts compose key input
+    context plugin
+    (LP: #1607237)
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Thu, 04 Aug 2016 14:40:45 +0300
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu11~2) yakkety; urgency=medium
+
+  * Rebuild against Qt 5.6.
+  * Disable tests on powerpc because of failures.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Wed, 20 Jul 2016 14:08:56 +0300
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu10) yakkety; urgency=medium
+
+  * debian/patches/0015-obey-unity8-focus.patch:
+    - Fix FocusInfo dbus path (LP: #1599145)
+
+ -- Michał Sawicz <michal.sawicz@canonical.com>  Tue, 05 Jul 2016 14:18:38 +0000
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu9) yakkety; urgency=medium
+
+  [ Michael Sheldon ]
+  * debian/patches/0015-obey-unity8-focus.patch:
+    - Ensure that an application has focus before allowing it to claim input
+      if we're running under Unity8
+
+  [ Łukasz 'sil2100' Zemczak ]
+  * debian/control:
+    - Add the libdbus-1-dev build-dep as per new patch requirement
+
+ -- Łukasz 'sil2100' Zemczak <lukasz.zemczak@ubuntu.com>  Mon, 27 Jun 2016 14:45:04 +0200
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu5) vivid; urgency=medium
+
+  * Add a fix that has been merged upstream. Checking the
+    MALIIT_SERVER_ADDRESS for the qt input context.
+
+ -- Brandon Schaefer <brandontschaefer@gmail.com>  Tue, 24 May 2016 12:06:11 -0700
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu3) xenial; urgency=medium
+
+  * Rebuild against Qt 5.5.1.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Mon, 30 Nov 2015 15:57:59 +0200
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu2) xenial; urgency=medium
+
+  * Add back missing changelog entries. No functional changes since the 
+    patches in missed uploads were merged upstream.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Wed, 25 Nov 2015 05:55:28 +0000
+
+maliit-framework (0.99.1+git20151118+62bd54b-0ubuntu1) xenial; urgency=medium
+
+  * New upstream release 0.99.1:
+    - Introduced Qt5 input context, replacing the one provided by Qt. Can 
+      be enabled by CONFIG+=qt5-inputcontext
+    - Move maliit-glib from GTK+ input context package back into frameowrk
+    - Use GDBus in maliit-glib
+    - Allow plugin window reactive area and input method area reported to
+      application differ
+    - Fix window state to have transient hint and window type as with
+      Maliit 0.8x
+    - Made the dependency from xcb optional
+    - Added a CONFIG option to disable the hardware keyboard
+    - Clear preedit state on input context reset
+    - Reshow virtual keyboard when hardware keyboard disappears
+    - Fix bugs with Qt 5.3, Qt 5.4 and Qt 5.5
+  * debian/control:
+    - Update standards version
+    - Replace libdbus-glib-1-dev with libglib2.0-dev
+    - Fix description of libmaliit-plugins0
+    - Add libmaliit-glib0 and libmaliit-glib-dev
+    - Remove maliit-inputcontext-gtk2 and maliit-inputcontext-gtk3
+  * debian/libmaliit-glib0.install:
+  * debian/libmaliit-glib-dev.install:
+    - Added, mark files for installation
+  * debian/maliit-framework.sh:
+  * debian/xinput/maliit:
+    - Export GTK_IM_MODULE under Unity 8
+  * debian/patches/series:
+  * debian/patches/0008-qt5.3-fix.patch:
+  * debian/patches/0014-fix-building-with-qt5.5.patch:
+  * debian/patches/0015-fix-plugin-iid.patch:
+    - Removed, fixed upstream
+  * debian/patches/0014-revert-6e2f8b4253f219688d31002aebf010eeabf0079b.patch:
+    - Added, install generated headers properly
+  * debian/rules:
+    - Don't qmake recursively
+    - Configure to build GLib bindings
+    - Disable warnings due to unused parameters, this is a bug that needs to
+      be fixed in GLib
+
+ -- William Hua <william.hua@canonical.com>  Wed, 18 Nov 2015 15:28:03 -0500
+
+maliit-framework (0.99.0+git20130923+17fdf86-0ubuntu12) wily; urgency=medium
+
+  * Add 0015-fix-plugin-iid.patch to fix keyboard functionality with Qt 5.5, 
+    #ifdef to build also on Qt 5.4.
+    (LP: #1474690)
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Mon, 05 Oct 2015 12:41:54 +0000
+
+maliit-framework (0.99.0+git20130923+17fdf86-0ubuntu11~gcc5.1) wily; urgency=medium
+
+  * No-change test rebuild for g++5 ABI transition
+
+ -- Steve Langasek <steve.langasek@ubuntu.com>  Wed, 15 Jul 2015 15:39:10 +0000
+
+maliit-framework (0.99.0+git20130923+17fdf86-0ubuntu10) wily; urgency=medium
+
+  * No-change rebuild against Qt 5.4.2.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Thu, 11 Jun 2015 21:28:58 +0300
+
+maliit-framework (0.99.0+git20130923+17fdf86-0ubuntu9) wily; urgency=medium
+
+  [ Michael Sheldon ]
+  * 0014-fix-building-with-qt5.5.patch: Fix FTBFS with Qt 5.5 (LP: #1437182)
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Thu, 04 Jun 2015 12:12:49 +0100
+
+maliit-framework (0.99.0+git20130923+17fdf86-0ubuntu8) vivid; urgency=medium
+
+  [ William Hua ]
+  * maliit-framework.sh prevents IBus and Fcitx from running under Unity 7
+    because of the export of QT_IM_MODULE. This export should only be done
+    under a Unity 8 session (LP: #1245925).
+
+ -- Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>  Thu, 26 Mar 2015 18:34:50 -0300
+
+maliit-framework (0.99.0+git20130923+17fdf86-0ubuntu7) vivid; urgency=medium
+
+  * No-change rebuild against Qt 5.4.1.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Wed, 11 Mar 2015 08:25:31 +0200
+
+maliit-framework (0.99.0+git20130923+17fdf86-0ubuntu6) vivid; urgency=medium
+
+  * No-change rebuild against Qt 5.4.0.
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Fri, 13 Feb 2015 13:58:04 +0200
+
+maliit-framework (0.99.0+git20130923+17fdf86-0ubuntu5) vivid; urgency=medium
+
+  [ Michael Sheldon ]
+  * 0013-check-testability-environment-variable.patch: check for the
+    QT_LOAD_TESTABILITY envrionment variable (LP: #1248729)
+
+ -- Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>  Thu, 20 Nov 2014 17:28:39 -0200
+
+maliit-framework (0.99.0+git20130923+17fdf86-0ubuntu4) vivid; urgency=medium
+
+  * Depend on libmtdev-dev for building. (LP: #1379152)
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Thu, 06 Nov 2014 12:12:17 +0200
+
+maliit-framework (0.99.0+git20130923+17fdf86-0ubuntu3) vivid; urgency=medium
+
+  [ Michael Sheldon ]
+  * 0012-fix-focus-changes.patch: Only allow maliit to remove focus
+    from input fields (LP: #1373985)
+
+ -- Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>  Mon, 03 Nov 2014 17:15:21 -0200
+
+maliit-framework (0.99.0+git20130923+17fdf86-0ubuntu2) utopic; urgency=medium
+
+  * 0011-fix-orientation-updates.patch: Ensure the correct orientation is
+    always updated in cases where app orientations change whilst the app
+    isn't in focus (e.g. when the phone lock screen is displayed)
+    (LP: #1355752) (LP: #1366855)
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Thu, 11 Sep 2014 17:13:44 +0100
+
+maliit-framework (0.99.0+git20130923+17fdf86-0ubuntu1) utopic; urgency=medium
+
+  * New upstream snapshot
+    - Dropping patches that are already in upstream
+    - Sync with latest from upstream
+
+ -- Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>  Mon, 18 Aug 2014 12:38:22 -0300
+
+maliit-framework (0.99.0+git20130615+97e8335-0ubuntu11) utopic; urgency=medium
+
+  [ Michael Sheldon ]
+  * 0010-fix-building-with-g++-4.9.patch: g++ 4.9 introduces a new check for
+    unused functions that we wish to ignore to avoid removing upstream code
+
+ -- Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>  Mon, 04 Aug 2014 17:16:34 -0300
+
+maliit-framework (0.99.0+git20130615+97e8335-0ubuntu10) utopic; urgency=medium
+
+  * Ensure that input method area sizes are always updated when sent from the
+    keyboard plugin regardless of whether the keyboard is currently active.
+    This allows for hiding animations to correctly set the input method area 
+    whilst the keyboard is otherwise inactive.
+
+ -- Michael Sheldon <michael.sheldon@canonical.com>  Mon, 28 Jul 2014 16:58:21 +0100
+
+maliit-framework (0.99.0+git20130615+97e8335-0ubuntu9) utopic; urgency=medium
+  
+  [ Timo Jyrinki ]
+  * Rebuild against Qt 5.3.
+
+  [ ultraviolet ]
+  * Add 0008-qt5.3-fix.patch:
+    - Fix building against Qt 5.3 (LP: #1323962)
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Mon, 02 Jun 2014 15:26:38 +0300
+
+maliit-framework (0.99.0+git20130615+97e8335-0ubuntu8) trusty; urgency=medium
+
+  * No-change rebuild for shlib changes in qtbase and qtdeclarative.
+
+ -- Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>  Fri, 11 Apr 2014 21:16:27 -0300
+
+maliit-framework (0.99.0+git20130615+97e8335-0ubuntu7) trusty; urgency=medium
+
+  * Bump the Qt dependency to 5.2, change the mkspecs install path as required
+    by the new Qt version (LP: #1279235).
+
+ -- Łukasz 'sil2100' Zemczak <lukasz.zemczak@canonical.com>  Thu, 27 Feb 2014 10:39:43 +0100
+
+maliit-framework (0.99.0+git20130615+97e8335-0ubuntu6) trusty; urgency=medium
+
+  * Fix mapping between screen orientations and rotation angles. (LP: #1251330)
+
+ -- Daniel d'Andrada <daniel.dandrada@canonical.com>  Fri, 31 Jan 2014 15:59:27 -0200
+
+maliit-framework (0.99.0+git20130615+97e8335-0ubuntu5) trusty; urgency=medium
+
+  * Modify xvfb command to successfully pass tests (LP: #1272249)
+
+ -- Timo Jyrinki <timo-jyrinki@ubuntu.com>  Fri, 24 Jan 2014 13:49:59 +0000
+
+maliit-framework (0.99.0+git20130615+97e8335-0ubuntu4) trusty; urgency=medium
+
+  [ Timo Jyrinki ]
+  * Remove hard-coded dependency on libqt5core5 (LP: #1270720).
+
+ -- Dmitry Shachnev <mitya57@ubuntu.com>  Fri, 24 Jan 2014 14:54:42 +0400
+
+maliit-framework (0.99.0+git20130615+97e8335-0ubuntu3) saucy; urgency=low
+
+  * Removing server.conf so the framework can use whatever is defined by
+    default. If a keyboard wants to replace the default behavior, it can
+    replace the system-wide config or make it per-user.
+
+ -- Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>  Wed, 21 Aug 2013 19:11:07 -0300
+
+maliit-framework (0.99.0+git20130615+97e8335-0ubuntu2) saucy; urgency=low
+
+  * Add missing Replaces/Breaks from libmaliit-plugins0 to maliit-framework
+    due to file move. (LP: #1204543)
+  * Restore some packaging bits that were dropped when the packaging was
+    rewritten from dh to cdbs in the previous upload.
+    - --fail-missing
+    - Run the testsuite
+  * Don't build-depend or use quilt explicitly. This is a 3.0 (quilt) package.
+  * Make transitional packages Arch: all and remove strict versioned deps.
+
+ -- Iain Lane <iain.lane@canonical.com>  Thu, 25 Jul 2013 09:45:13 +0000
+
+maliit-framework (0.99.0+git20130615+97e8335-0ubuntu1) saucy; urgency=low
+
+  [ Sergio Schvezov ]
+  * New build from HEAD 97e8335.
+  * Packaging import from lp:phablet-extras/maliit-framework.
+
+  [ Ricardo Salveti de Araujo ]
+  * debian/control: adding vcs and fixing dependencies
+  * General package cleanup
+
+ -- Ricardo Salveti de Araujo <ricardo.salveti@canonical.com>  Tue, 23 Jul 2013 19:47:04 -0300
+
+maliit-framework (0.94.2-0ubuntu1b1) raring; urgency=low
+
+  * No-change rebuild against libudev1
+
+ -- Martin Pitt <martin.pitt@ubuntu.com>  Wed, 13 Mar 2013 07:07:56 +0000
+
+maliit-framework (0.94.2-0ubuntu1) raring; urgency=low
+
+  * New upstream release
+   + Do not abort if there are no plugins
+   + Do not call g_type_init for glib > 2.34
+   + Do not use debug config for unit tests
+  * Add new maliit-dbus-activation package to be installed when the user
+    wishes to use maliit in this way (for example on a tablet). The default is
+    to use explicit input method configuration. This currently only works with
+    im-switch; im-config (Ubuntu's default IM switching framework) integration
+    is still pending.
+
+ -- Iain Lane <iain.lane@canonical.com>  Tue, 26 Feb 2013 11:44:26 +0000
+
+maliit-framework (0.94.1-1~ubuntu4) raring; urgency=low
+
+  * Use compat 9 so that build flags are passed into the buildsystem for us.
+  * Use qmake-qt4 explicitly (for now).
+
+ -- Iain Lane <iain.lane@canonical.com>  Fri, 08 Feb 2013 10:01:17 +0000
+
+maliit-framework (0.94.1-1~ubuntu3) raring; urgency=low
+
+  * Call dh_girepository to generate correct deps for gir package 
+
+ -- Iain Lane <iain.lane@canonical.com>  Thu, 07 Feb 2013 17:58:25 +0000
+
+maliit-framework (0.94.1-1~ubuntu2) raring; urgency=low
+
+  * Remove overly fragile C++ symbols file for libmaliit0. 
+
+ -- Iain Lane <iain.lane@canonical.com>  Tue, 05 Feb 2013 12:30:53 +0000
+
+maliit-framework (0.94.1-1~ubuntu1) raring; urgency=low
+
+  * Upload to Ubuntu while waiting for Debian NEW 
+
+ -- Iain Lane <iain.lane@canonical.com>  Thu, 31 Jan 2013 13:26:48 +0000
+
+maliit-framework (0.94.1-1) experimental; urgency=low
+
+  * Upload to Debian (Closes: #699428)
+  * New upstream release 0.94.1
+  * Use dh(1) in d/rules 
+  * Fix package names and rationalise packages
+  * Add watch file
+  * Run tests in package build under xvfb
+  * Integrate changes from Michał Zając.
+    - Rewrite / minimise copyright file
+    - Install xinput.d alternative
+
+ -- Iain Lane <iain.lane@canonical.com>  Thu, 31 Jan 2013 12:02:21 +0000
+
+maliit-framework (0.94.0-0ubuntu1~0openismus1) quantal; urgency=low
+
+  * New upstream release:
+  - Add Wayland input method support
+  - Auto-detect subviews based on system locale
+    - If no configuration exists, Maliit uses LANGUAGE to guess plugin's
+      subview(s).
+  - Don't write user configuration to disk for default values
+    - Only write *actual* user configuration that's different from factory
+      defaults.
+  - Remove version suffix from libraries and install directories
+    - Affects packaging & {header, .pc , .prf} install directories
+  - Adjust to Qt 5.0.0 API changes
+  - Add surface support for QtQuick2
+
+ -- Murray Cumming <murrayc@openismus.com>  Mon, 14 Jan 2013 10:52:01 +0100
+
+maliit-framework (0.93.1-0ubuntu1~openismus3) quantal; urgency=low
+
+  * control: Fixed typos.
+  Fixed a typo in a dependency name to fix the package build.
+  Fixed a typo in a version variable.
+
+ -- Murray Cumming <murrayc@openismus.com>  Fri, 04 Jan 2013 22:31:44 +0100
+
+maliit-framework (0.93.1-0ubuntu1~openismus2) quantal; urgency=low
+
+  * Fixed some lintian warnings.
+
+ -- Murray Cumming <murrayc@openismus.com>  Fri, 14 Dec 2012 12:56:47 +0100
+
+maliit-framework (0.93.1-0ubuntu1~openismus1) quantal; urgency=low
+
+  * New upstream release.
+
+ -- Murray Cumming <murrayc@openismus.com>  Fri, 14 Dec 2012 11:04:22 +0100
+
+maliit-framework (0.92.4-0ubuntu1~openismus1) quantal; urgency=low
+
+  * A manual build, so uupdate does not consider this to be a native debian package.
+  * Remove mention of usr/share/gconf/schemas/maliit-framework.schemas
+    which no longer exists, so that broke the install.
+
+ -- Murray Cumming <murrayc@openismus.com>  Fri, 14 Dec 2012 10:43:00 +0000
+
+maliit-framework (0.92.4~latest~r1548~pkg40~quantal1) quantal; urgency=low
+
+  * Auto build.
+
+ -- Launchpad Package Builder <noreply@launchpad.net>  Thu, 27 Sep 2012 20:13:56 +0000
+
+maliit-framework (0.81.0.1-0) unstable; urgency=low
+
+  * New release
+
+ -- Jon Nordby <jonn@openismus.com>  Tue, 06 Sep 2011 12:41:43 +0300
+
+

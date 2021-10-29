@@ -1,0 +1,11 @@
+usr/lib/*/qt5/mkspecs/features/maliit-defines.prf
+usr/lib/*/qt5/mkspecs/features/maliit-framework.prf
+usr/lib/*/qt5/mkspecs/features/maliit-plugins.prf
+usr/include/maliit/framework
+usr/include/maliit/plugins
+usr/include/maliit/plugins/*
+usr/include/maliit/server
+usr/lib/libmaliit-plugins.so
+usr/lib/pkgconfig/maliit-framework.pc
+usr/lib/pkgconfig/maliit-plugins.pc
+usr/lib/pkgconfig/maliit-server.pc

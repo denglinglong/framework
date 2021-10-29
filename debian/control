@@ -1,0 +1,138 @@
+Source: maliit-framework
+Section: libs
+Priority: extra
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Debian Mobile Team <debian-mobile@lists.debian.org>
+Uploaders: Michał Zając <quintasan@kubuntu.org>, Iain Lane <laney@debian.org>
+Build-Depends: cdbs,
+               debhelper (>= 9),
+               libdbus-1-dev,
+               libglib2.0-dev,
+               libmtdev-dev,
+               libudev-dev,
+               libxcb-composite0-dev,
+               libxcb-damage0-dev,
+               libxcb-xfixes0-dev,
+               libxext-dev,
+               pkg-config,
+               qtbase5-dev (>= 5.2),
+               qtbase5-private-dev,
+               qtdeclarative5-dev,
+# Test depends
+               xvfb,
+               qml-module-qtquick2
+Standards-Version: 3.9.6
+Homepage: https://wiki.maliit.org
+Vcs-Browser: https://code.launchpad.net/~ubuntu-core-dev/maliit/maliit-framework-ubuntu
+Vcs-Bzr: lp:~ubuntu-core-dev/maliit/maliit-framework-ubuntu
+
+Package: maliit-framework
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Recommends: maliit-inputmethod-plugin
+Breaks: gir1.2-maliit-1.0 (<< ${source:Version}),
+        libmaliit-glib0 (<< ${source:Version}),
+        libmaliit0 (<< ${source:Version}),
+        maliit-dbus-activation (<< ${source:Version}),
+        maliit-inputcontext-qt4 (<< ${source:Version}),
+Description: Maliit Input Method Framework
+ Maliit provides a flexible and cross-platform input method framework. It has a
+ plugin-based client-server architecture where applications act as clients and
+ communicate with the Maliit server via input context plugins. The communication
+ link currently uses D-Bus. Maliit is an open source framework (LGPL 2) with
+ open source plugins (BSD).
+
+Package: libmaliit-plugins0
+Architecture: any
+Breaks: maliit-framework (<< 0.99)
+Replaces: maliit-framework (<< 0.99)
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+Description: Maliit Input Method Framework - Plugin Library
+ Maliit provides a flexible and cross-platform input method framework. It has a
+ plugin-based client-server architecture where applications act as clients and
+ communicate with the Maliit server via input context plugins. The communication
+ link currently uses D-Bus. Maliit is an open source framework (LGPL 2) with
+ open source plugins (BSD).
+ .
+ This package provides the maliit plugin library for the Maliit framework.
+
+Package: maliit-framework-dev
+Architecture: any
+Section: libdevel
+Depends: maliit-framework (= ${binary:Version}), ${misc:Depends}
+Description: Maliit Input Method Framework - Development Files
+ Maliit provides a flexible and cross-platform input method framework. It has a
+ plugin-based client-server architecture where applications act as clients and
+ communicate with the Maliit server via input context plugins. The communication
+ link currently uses D-Bus. Maliit is an open source framework (LGPL 2) with
+ open source plugins (BSD).
+ .
+ This package is needed to compile plugins for the Maliit framework
+
+Package: maliit-framework-dbg
+Section: debug
+Architecture: any
+Depends: maliit-framework (= ${binary:Version}), ${misc:Depends}
+Description: Maliit Input Method Framework - Debug symbols
+ Maliit provides a flexible and cross-platform input method framework. It has a
+ plugin-based client-server architecture where applications act as clients and
+ communicate with the Maliit server via input context plugins. The communication
+ link currently uses D-Bus. Maliit is an open source framework (LGPL 2) with
+ open source plugins (BSD).
+ .
+ This package contains debugging symbols.
+
+Package: gir1.2-maliit-1.0
+Depends: maliit-framework, ${misc:Depends}
+Architecture: all
+Section: oldlibs
+Description: transitional dummy package
+ This is a transitional dummy package. It can safely be removed.
+
+Package: libmaliit-glib0
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Architecture: any
+Section: libs
+Description: Maliit Input Method Framework - GLib Bindings
+ Maliit provides a flexible and cross-platform input method framework. It has a
+ plugin-based client-server architecture where applications act as clients and
+ communicate with the Maliit server via input context plugins. The communication
+ link currently uses D-Bus. Maliit is an open source framework (LGPL 2) with
+ open source plugins (BSD).
+ .
+ This package provides GLib bindings for the Maliit framework.
+
+Package: libmaliit-glib-dev
+Depends: libmaliit-glib0 (= ${binary:Version}), ${misc:Depends}, ${shlibs:Depends}
+Architecture: any
+Section: libdevel
+Description: Maliit Input Method Framework - GLib Development Headers
+ Maliit provides a flexible and cross-platform input method framework. It has a
+ plugin-based client-server architecture where applications act as clients and
+ communicate with the Maliit server via input context plugins. The communication
+ link currently uses D-Bus. Maliit is an open source framework (LGPL 2) with
+ open source plugins (BSD).
+ .
+ This package provides GLib development headers for the Maliit framework.
+
+Package: libmaliit0
+Depends: maliit-framework, ${misc:Depends}
+Architecture: all
+Section: oldlibs
+Description: transitional dummy package
+ This is a transitional dummy package. It can safely be removed.
+
+Package: maliit-dbus-activation
+Depends: maliit-framework, ${misc:Depends}
+Architecture: all
+Section: oldlibs
+Description: transitional dummy package
+ This is a transitional dummy package. It can safely be removed.
+
+Package: maliit-inputcontext-qt4
+Depends: maliit-framework, ${misc:Depends}
+Architecture: all
+Section: oldlibs
+Description: transitional dummy package
+ This is a transitional dummy package. It can safely be removed.

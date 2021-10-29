@@ -1,0 +1,82 @@
+From d5ba4860ba655bfb62b62c7010422de9c064a4bc Mon Sep 17 00:00:00 2001
+From: William Hua <william.hua@canonical.com>
+Date: Wed, 18 Nov 2015 16:56:12 -0500
+Subject: [PATCH] Revert "Move GDBus code generation to maliit-glib"
+
+This reverts commit 6e2f8b4253f219688d31002aebf010eeabf0079b.
+
+The previous commit caused a regression where the generated headers
+maliitserver.h and maliitcontext.h would no longer be installed on 'make
+install'. The problem is due to how QMake works: it processes the list
+of HEADERSINSTALL before generating them via the glib_server and
+glib_context targets.
+---
+ dbus_interfaces/dbus_interfaces.pro | 19 +++++++++++++++++++
+ maliit-glib/maliit-glib.pro         | 20 ++------------------
+ 2 files changed, 21 insertions(+), 18 deletions(-)
+
+diff --git a/dbus_interfaces/dbus_interfaces.pro b/dbus_interfaces/dbus_interfaces.pro
+index 87ee2f7..e494d04 100644
+--- a/dbus_interfaces/dbus_interfaces.pro
++++ b/dbus_interfaces/dbus_interfaces.pro
+@@ -9,3 +9,22 @@ TARGET = dummy
+ OTHER_FILES += \
+     minputmethodcontext1interface.xml \
+     minputmethodserver1interface.xml
++
++glib {
++    include($$TOP_DIR/dbus_interfaces/dbus_interfaces.pri)
++
++    PRE_TARGETDEPS += glib_server glib_context
++    QMAKE_EXTRA_TARGETS += glib_server glib_context
++
++    glib_server.commands = gdbus-codegen --interface-prefix com.meego \
++                                         --generate-c-code $$TOP_DIR/maliit-glib/maliitserver \
++                                         --c-namespace Maliit \
++                                         --annotate com.meego.inputmethod.uiserver1 org.gtk.GDBus.C.Name Server \
++                                         $$DBUS_SERVER_XML
++
++    glib_context.commands = gdbus-codegen --interface-prefix com.meego \
++                                          --generate-c-code $$TOP_DIR/maliit-glib/maliitcontext \
++                                          --c-namespace Maliit \
++                                          --annotate com.meego.inputmethod.inputcontext1 org.gtk.GDBus.C.Name Context \
++                                          $$DBUS_CONTEXT_XML
++}
+diff --git a/maliit-glib/maliit-glib.pro b/maliit-glib/maliit-glib.pro
+index c4667de..78cc5c9 100644
+--- a/maliit-glib/maliit-glib.pro
++++ b/maliit-glib/maliit-glib.pro
+@@ -11,6 +11,8 @@ PKGCONFIG += glib-2.0 gobject-2.0 gio-2.0 gio-unix-2.0
+ 
+ CONFIG -= qt
+ 
++include($$TOP_DIR/connection-glib/libmaliit-connection-glib.pri)
++
+ QMAKE_CXXFLAGS_DEBUG+=-Wno-error=deprecated-declarations
+ QMAKE_CFLAGS_DEBUG+=-Wno-error=deprecated-declarations
+ 
+@@ -98,21 +100,3 @@ glib_genmarshal_source.variable_out = SOURCES
+ glib_genmarshal_source.input = GLIB_GENMARSHAL_LIST
+ 
+ QMAKE_EXTRA_COMPILERS += glib_genmarshal_header glib_genmarshal_source
+-
+-include($$TOP_DIR/dbus_interfaces/dbus_interfaces.pri)
+-
+-PRE_TARGETDEPS += glib_server glib_context
+-QMAKE_EXTRA_TARGETS += glib_server glib_context
+-
+-glib_server.commands = gdbus-codegen --interface-prefix com.meego \
+-                                     --generate-c-code $$TOP_DIR/maliit-glib/maliitserver \
+-                                     --c-namespace Maliit \
+-                                     --annotate com.meego.inputmethod.uiserver1 org.gtk.GDBus.C.Name Server \
+-                                     $$DBUS_SERVER_XML
+-
+-glib_context.commands = gdbus-codegen --interface-prefix com.meego \
+-                                      --generate-c-code $$TOP_DIR/maliit-glib/maliitcontext \
+-                                      --c-namespace Maliit \
+-                                      --annotate com.meego.inputmethod.inputcontext1 org.gtk.GDBus.C.Name Context \
+-                                      $$DBUS_CONTEXT_XML
+-
+-- 
+2.6.2
+

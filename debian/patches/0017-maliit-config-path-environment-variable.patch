@@ -1,0 +1,61 @@
+Description: Allow the maliit config to be set via an environment variable
+ Introduces a new MALIIT_CONFIG_PATH environment variable allowing the
+ configuration file to be selected at run time. This is necessary for use
+ within snaps.
+
+Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/maliit-framework/+bug/1639297
+Forwarded: no
+Last-Update: 2017-01-17
+
+--- maliit-framework-0.99.1+git20151118+62bd54b.orig/src/mimsettingsqsettings.cpp
++++ maliit-framework-0.99.1+git20151118+62bd54b/src/mimsettingsqsettings.cpp
+@@ -163,13 +163,25 @@ MImSettingsQSettingsBackend::~MImSetting
+ 
+ /* QSettings backend backed by the native settings store for the Maliit Server org. and app. */
+ MImSettingsQSettingsBackendFactory::MImSettingsQSettingsBackendFactory()
+-    : mSettings(Organization, Application)
+-{}
++{
++    QByteArray configPath = qgetenv("MALIIT_CONFIG_PATH");
++    if (!configPath.isEmpty()) {
++        mSettings.reset(new QSettings(QString(configPath), QSettings::IniFormat));
++    } else {
++        mSettings.reset(new QSettings(Organization, Application));
++    }
++}
+ 
+ MImSettingsQSettingsBackendFactory::MImSettingsQSettingsBackendFactory(const QString &organization,
+                                                                        const QString &application)
+-    : mSettings(organization, application)
+-{}
++{
++    QByteArray configPath = qgetenv("MALIIT_CONFIG_PATH");
++    if (!configPath.isEmpty()) {
++        mSettings.reset(new QSettings(QString(configPath), QSettings::IniFormat));
++    } else {
++        mSettings.reset(new QSettings(organization, application));
++    }
++}
+ 
+ MImSettingsQSettingsBackendFactory::~MImSettingsQSettingsBackendFactory()
+ {
+@@ -177,7 +189,7 @@ MImSettingsQSettingsBackendFactory::~MIm
+ 
+ MImSettingsBackend *MImSettingsQSettingsBackendFactory::create(const QString &key, QObject *parent)
+ {
+-    return new MImSettingsQSettingsBackend(&mSettings, key, parent);
++    return new MImSettingsQSettingsBackend(mSettings.data(), key, parent);
+ }
+ 
+ /* QSettings backend backed by a temporary file */
+--- maliit-framework-0.99.1+git20151118+62bd54b.orig/src/mimsettingsqsettings.h
++++ maliit-framework-0.99.1+git20151118+62bd54b/src/mimsettingsqsettings.h
+@@ -60,7 +60,7 @@ public:
+     virtual MImSettingsBackend *create(const QString &key, QObject *parent);
+ 
+ private:
+-    QSettings mSettings;
++    QScopedPointer<QSettings> mSettings;
+ };
+ 
+ class MImSettingsQSettingsTemporaryBackendFactory : public MImSettingsBackendFactory

@@ -1,0 +1,27 @@
+Description: Check the QT_LOAD_TESTABILITY envrionment variable
+ Load the testability driver if the QT_LOAD_TESTABILITY environment variable
+ is set to 1.
+Author: Michael Sheldon <michael.sheldon@canonical.com>
+Bug-Ubuntu: https://bugs.launchpad.net/bugs/1248729
+
+--- maliit-framework-0.99.0+git20130923+17fdf86.orig/passthroughserver/main.cpp
++++ maliit-framework-0.99.0+git20130923+17fdf86/passthroughserver/main.cpp
+@@ -27,6 +27,7 @@
+ 
+ #include <QGuiApplication>
+ #include <QtDebug>
++#include <QProcessEnvironment>
+ 
+ #include <qpa/qplatformnativeinterface.h>
+ 
+@@ -140,7 +141,9 @@ int main(int argc, char **argv)
+ 
+     // The testability driver is only loaded by QApplication but not by QGuiApplication.
+     // However, QApplication depends on QWidget which would add some unneeded overhead => Let's load the testability driver on our own.
+-    if (app.arguments().contains(QLatin1String("-testability"))) {
++    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
++
++    if (app.arguments().contains(QLatin1String("-testability")) || env.value("QT_LOAD_TESTABILITY", "0") == "1") {
+       QLibrary testLib(QLatin1String("qttestability"));
+       if (testLib.load()) {
+ 	typedef void (*TasInitialize)(void);

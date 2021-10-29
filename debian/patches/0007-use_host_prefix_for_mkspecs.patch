@@ -1,0 +1,26 @@
+Author: Łukasz 'sil2100' Zemczak <lukasz.zemczak@canonical.com>
+Bug: https://bugs.launchpad.net/ubuntu/+source/maliit-framework/+bug/1279235
+Forwarded: no
+Description: Change the mkspecs install directory for Qt 5.2
+ This patch is based on the patch created by Timo Jyrinki - but we also try to make
+ the install path change Qt-version-dependent.
+
+Index: maliit-framework-0.99.0+git20130615+97e8335/config.pri
+===================================================================
+--- maliit-framework-0.99.0+git20130615+97e8335.orig/config.pri	2013-06-15 04:04:41.000000000 +0200
++++ maliit-framework-0.99.0+git20130615+97e8335/config.pri	2014-02-26 17:18:45.824253918 +0100
+@@ -142,7 +142,13 @@
+     DEFINES += NOXCB
+ }
+ 
+-MALIIT_INSTALL_PRF = $$[QT_INSTALL_DATA]/mkspecs/features
++equals(QT_MAJOR_VERSION, 5):greaterThan(QT_MINOR_VERSION, 1) {
++    MALIIT_INSTALL_PRF = $$[QT_INSTALL_ARCHDATA]/mkspecs/features
++}
++else {
++    MALIIT_INSTALL_PRF = $$[QT_INSTALL_DATA]/mkspecs/features
++}
++
+ local-install {
+     MALIIT_INSTALL_PRF = $$replace(MALIIT_INSTALL_PRF, $$[QT_INSTALL_PREFIX], $$PREFIX)
+ }

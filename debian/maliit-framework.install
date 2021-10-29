@@ -1,0 +1,4 @@
+debian/maliit-framework.sh etc/profile.d/
+debian/xinput/* etc/X11/xinit/xinput.d
+usr/bin/maliit-server
+usr/lib/*/qt5/plugins/platforminputcontexts/libmaliitphabletplatforminputcontextplugin.so

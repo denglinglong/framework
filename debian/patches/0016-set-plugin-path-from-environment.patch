@@ -1,0 +1,21 @@
+Description: Allow the plugin path to be set from an environment variable
+ Add the MALIIT_PLUGIN_PATH environment variable to allow for snaps to
+ set a custom plugin location.
+Author: Michael Sheldon <michael.sheldon@canonical.com>
+Forwarded: no
+Bug-Ubuntu: https://bugs.launchpad.net/ubuntu/+source/maliit-framework/+bug/1639297
+
+--- maliit-framework-0.99.1+git20151118+62bd54b.orig/src/mimpluginmanager.cpp
++++ maliit-framework-0.99.1+git20151118+62bd54b/src/mimpluginmanager.cpp
+@@ -1190,6 +1190,11 @@ MIMPluginManager::MIMPluginManager(const
+             this, SLOT(onGlobalAttributeChanged(MAttributeExtensionId,QString,QString,QVariant)));
+ 
+     d->paths        = MImSettings(MImPluginPaths).value(QStringList(DefaultPluginLocation)).toStringList();
++    QByteArray pluginPathEnvVar = qgetenv("MALIIT_PLUGIN_PATH");
++    if (!pluginPathEnvVar.isEmpty()) {
++        d->paths.append(pluginPathEnvVar);
++    }
++
+     d->blacklist    = MImSettings(MImPluginDisabled).value().toStringList();
+ 
+     d->loadPlugins();

@@ -1,0 +1,3 @@
+usr/lib/libmaliit-glib.so
+usr/include/maliit/maliit-glib/*
+usr/lib/pkgconfig/maliit-glib.pc

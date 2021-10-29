@@ -1,0 +1,21 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        update-alternatives \
+            --install /etc/X11/xinit/xinput.d/all_ALL xinput-all_ALL \
+            /etc/X11/xinit/xinput.d/maliit 15 ;
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#

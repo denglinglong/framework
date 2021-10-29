@@ -1,0 +1,21 @@
+Author: Michael Sheldon <michael.sheldon@canonical.com>
+Forwarded: no
+Description: Ensure orientation updates are always sent when valid
+ This makes sure the correct orientation is always updated in cases where app 
+ orientations change whilst the app isn't in focus (e.g. when the phone lock 
+ screen is displayed)
+
+Index: maliit-framework-0.99.0+git20130923+17fdf86/input-context/minputcontext.cpp
+===================================================================
+--- maliit-framework-0.99.0+git20130923+17fdf86.orig/input-context/minputcontext.cpp
++++ maliit-framework-0.99.0+git20130923+17fdf86/input-context/minputcontext.cpp
+@@ -277,6 +277,9 @@ void MInputContext::setFocusObject(QObje
+     if (!active && currentFocusAcceptsInput) {
+         imServer->activateContext();
+         active = true;
++    }
++
++    if (currentFocusAcceptsInput) {
+         updateServerOrientation(newFocusWindow->contentOrientation());
+     }
+ 

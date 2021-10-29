@@ -1,0 +1,17 @@
+0001-rename_input_context.patch
+0002-ubuntu_session_type.patch
+0004-fix_activationlostevent.patch
+0005-testability.patch
+0006-fix_orientation_to_angle_mapping.patch
+0007-use_host_prefix_for_mkspecs.patch
+0009-update-input-region-when-hiding.patch
+0010-fix-building-with-g++-4.9.patch
+0011-fix-orientation-updates.patch
+0012-fix-focus-changes.patch
+0013-check-testability-environment-variable.patch
+0014-revert-6e2f8b4253f219688d31002aebf010eeabf0079b.patch
+qt_override_server_address
+0015-obey-unity8-focus.patch
+compose-input-platform-in-maliit.patch
+0016-set-plugin-path-from-environment.patch
+0017-maliit-config-path-environment-variable.patch

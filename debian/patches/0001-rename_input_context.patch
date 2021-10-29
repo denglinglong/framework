@@ -1,0 +1,41 @@
+From: Thomas Moenicke <thomas.moenicke@canonical.com>
+Subject: Renaming plugin to not conflict with the one provided by Qt
+Forwarded: no
+
+Index: maliit-framework-0.99+git20130702+97e8335/input-context/input-context.pro
+===================================================================
+--- maliit-framework-0.99+git20130702+97e8335.orig/input-context/input-context.pro	2013-07-16 09:57:37.000000000 +0000
++++ maliit-framework-0.99+git20130702+97e8335/input-context/input-context.pro	2013-07-16 09:57:37.000000000 +0000
+@@ -5,7 +5,7 @@
+ QT += dbus gui-private quick
+ TEMPLATE = lib
+ CONFIG += plugin
+-TARGET = maliitplatforminputcontextplugin
++TARGET = maliitphabletplatforminputcontextplugin
+ 
+ target.path = $$[QT_INSTALL_PLUGINS]/platforminputcontexts
+ 
+Index: maliit-framework-0.99+git20130702+97e8335/input-context/main.cpp
+===================================================================
+--- maliit-framework-0.99+git20130702+97e8335.orig/input-context/main.cpp	2013-07-16 09:57:37.000000000 +0000
++++ maliit-framework-0.99+git20130702+97e8335/input-context/main.cpp	2013-07-16 09:57:37.000000000 +0000
+@@ -32,7 +32,7 @@
+ {
+     Q_UNUSED(paramList);
+ 
+-    if (system.compare(system, QStringLiteral("maliit"), Qt::CaseInsensitive) == 0) {
++    if (system.compare(system, QStringLiteral("MaliitPhablet"), Qt::CaseInsensitive) == 0) {
+         return new MInputContext;
+     }
+     return 0;
+
+
+Index: maliit-framework-0.99+git20130702+97e8335/input-context/maliit.json
+===================================================================
+--- maliit-framework-0.99+git20130702+97e8335.orig/input-context/maliit.json	2013-07-16 10:28:11.000000000 +0000
++++ maliit-framework-0.99+git20130702+97e8335/input-context/maliit.json		2013-07-16 10:29:24.000000000 +0000
+@@ -1,3 +1,3 @@
+ {
+-    "Keys": [ "maliit" ]
++    "Keys": [ "maliitphablet" ]
+ }
